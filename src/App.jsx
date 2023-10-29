@@ -1,39 +1,29 @@
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
-import { nanoid } from 'nanoid';
 import css from './App.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
-import { useEffect } from 'react';
-import { requestContacts } from 'redux/operations';
+import { Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 export const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(requestContacts());
-  },[dispatch])
-
-  const contacts = useSelector(state => state.contacts.contactsData);
-
-  const handleAddContact = (name, number) => {
-    const isContact = contacts.some(contact => contact.name === name && contact.number === number) 
-    if (isContact) {
-      alert(`${name} is already in contact.`);
-      return;
-    }
-  
-    dispatch(addContact({ id: nanoid(), name, number }));
- };
-
-
   return (
     <div className={css.box}>
-      <h1 className={css.title}>Phonebook</h1>
-      <ContactForm onAddContact={handleAddContact} />
-      <h2 className={css.title}>Contacts</h2>
-      <Filter />
-      <ContactList />
+      <Suspense fallback="Loading...">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <h1 className={css.title}>Phonebook</h1>
+                <ContactForm />
+                <h2 className={css.title}>Contacts</h2>
+                <Filter />
+                <ContactList />
+              </>
+            }
+          />
+        </Routes>
+      </Suspense>
     </div>
   );
 };

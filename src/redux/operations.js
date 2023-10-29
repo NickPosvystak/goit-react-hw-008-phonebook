@@ -1,42 +1,46 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import axios from 'axios';
-import { fetchAddContacts, fetchContacts, fetchDeleteContacts } from 'services/api';
+import {
+  requestAddContacts,
+  requestContacts,
+  requestDeleteContacts,
+} from 'services/api';
 
-axios.defaults.baseURL = 'https://6537d9cda543859d1bb0f2ae.mockapi.io';
-
-export const requestContacts = createAsyncThunk(
+export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
-  async (_, thunkAPI) => {
+  async (_, thunkApi) => {
     try {
-      const contactsData = await fetchContacts();
-      return contactsData;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-  );
-  console.log('requestContacts: ', requestContacts());
+      const contacts = await requestContacts();
 
-export const addContact = createAsyncThunk(
-  'contacts/addContact',
-  async (mewContact, thunkAPI) => {
-    try {
-      const contactsData = await fetchAddContacts(mewContact);
-      return contactsData;
+      return contacts;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );
 
-export const deleteContact = createAsyncThunk('contacts/deleteContact',
-    async (id, thunkAPI) => { 
-        try {
-            const contactsData = await fetchDeleteContacts(id);
-            return contactsData;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.message);
-            
-        }
-    });
+export const addContact = createAsyncThunk(
+  'contacts/addContact',
+  async (newContact, thunkApi) => {
+    try {
+      const contact = await requestAddContacts(newContact);
+
+      return contact;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteContact = createAsyncThunk(
+  'contacts/deleteContact',
+  async (id, thunkApi) => {
+    try {
+      const deletedContact = await requestDeleteContacts(id);
+
+      return deletedContact;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
