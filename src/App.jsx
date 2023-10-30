@@ -2,8 +2,10 @@ import { ContactForm } from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
 import css from './App.module.css';
-import { Suspense } from 'react';
+import { Suspense} from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+// const ContactForm = lazy(() => import('components/ContactForm/ContactForm'));
 
 export const App = () => {
   return (
