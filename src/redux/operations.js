@@ -5,6 +5,7 @@ import {
   requestContacts,
   requestDeleteContacts,
 } from 'services/api';
+import { requestLogin, requestRegister } from 'services/contactsApi';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
@@ -44,3 +45,34 @@ export const deleteContact = createAsyncThunk(
     }
   }
 );
+
+
+// Authorizations------------------------
+
+export const loginThunk = createAsyncThunk(
+  'auth/login',
+  async (formData, thunkAPI) => {
+    try {
+      const response = await requestLogin(formData)
+      console.log('response: ', response);
+
+      return response  // Go to payload
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message)
+    }
+  }
+)
+
+export const registerThunk = createAsyncThunk(
+  'auth/register',
+  async (formData, thunkAPI) => {
+    try {
+      const response = await requestRegister(formData);
+      console.log('response: ', response);
+
+      return response; // Go to payload
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message)
+    }
+  }
+)
