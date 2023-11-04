@@ -1,19 +1,26 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { registerThunk } from 'redux/operations';
 
 const LoginPage = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
-
+  
+  const dispatch = useDispatch()
+  
   const onSubmit = data => {
-    console.log(data);
+dispatch(registerThunk(data))
+
+    reset();
   };
 
+  
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form onSubmit={handleSubmit(onSubmit)}>
       <label>
         <span>Email:</span>

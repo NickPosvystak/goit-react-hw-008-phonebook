@@ -67,10 +67,10 @@ export const registerThunk = createAsyncThunk(
   'auth/register',
   async (formData, thunkAPI) => {
     try {
-      const response = await requestRegister(formData);
-      console.log('response: ', response);
+      const authData = await requestRegister(formData);
+      console.log('response: ', authData);
 
-      return response; // Go to payload
+      return authData; // Go to payload
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message)
     }
