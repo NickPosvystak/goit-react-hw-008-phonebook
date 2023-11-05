@@ -29,9 +29,8 @@ const appRoutes = [
 export const App = () => {
   return (
     <>
-
-      <div className={css.box}>
-      <Navigation />
+       <div className={css.box}>
+        <Navigation />
         <Suspense fallback="Loading...">
           <Routes>
             {appRoutes.map(({ path, element }) => (

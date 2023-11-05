@@ -11,6 +11,7 @@ const contactsInstance = axios.create({
 
 export const requestRegister = async formData => {
   const { data } = await contactsInstance.post('/users/signup', formData);
+  console.log('data: ', data);
 
   return data;
 };
