@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { requestLogin, requestRegister } from 'services/contactsApi';
+import {
+  requestLogin,
+  requestRefreshUser,
+  requestRegister,
+  setToken,
+} from 'services/contactsApi';
 
 // Authorizations-----------ThunkAPI-------------
 
@@ -8,7 +13,6 @@ export const loginThunk = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       const response = await requestLogin(formData);
-      console.log('response: ', response);
 
       return response; // Go to payload
     } catch (error) {
@@ -28,6 +32,31 @@ export const registerThunk = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
+  }
+);
+export const refreshThunk = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = state.auth.token;
+    try {
+      setToken(token);
+      const authData = await requestRefreshUser();
+      console.log('authData: ', authData);
+
+      return authData; // Go to payload
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+  {
+    condition: (_, thunkAPI) => {
+      const state = thunkAPI.getState();
+      const token = state.auth.token;
+
+      if (!token) return false;
+      return true; 
+    },
   }
 );
 
@@ -69,7 +98,7 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Login additional-----
+      //Login additional-----
 
       .addCase(loginThunk.pending, state => {
         state.isLoading = true;

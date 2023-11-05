@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { registerThunk } from 'redux/AuthReducer';
+import { loginThunk } from 'redux/AuthReducer';
 
 const LoginPage = () => {
   const {
@@ -10,16 +10,16 @@ const LoginPage = () => {
     reset,
     formState: { errors },
   } = useForm();
-  
-  const dispatch = useDispatch()
-  
+
+  const dispatch = useDispatch();
+
   const onSubmit = data => {
-dispatch(registerThunk(data))
+    dispatch(loginThunk(data));
+    console.log('data: ', data);
 
     reset();
   };
 
-  
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label>
@@ -27,11 +27,7 @@ dispatch(registerThunk(data))
         <input {...register('email', { required: true })} type="email" />
         {errors.email && <span>This field is required</span>}
       </label>
-      <label>
-        <span>Name:</span>
-        <input {...register('name', { required: true })} type="text" />
-        {errors.name && <span>This field is required</span>}
-      </label>
+    
       <label>
         <span>Password:</span>
         <input
@@ -41,8 +37,7 @@ dispatch(registerThunk(data))
         {errors.password && <span>This field is required</span>}
       </label>
 
-      <button type='submit'>Sign Up</button>
-
+      <button type="submit">Sign In</button>
     </form>
   );
 };
