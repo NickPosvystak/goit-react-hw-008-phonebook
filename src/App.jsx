@@ -7,6 +7,9 @@ import { Route, Routes } from 'react-router-dom';
 import Navigation from 'components/Navigation';
 import { useDispatch } from 'react-redux';
 import { refreshThunk } from 'redux/AuthReducer';
+import RestrictedRoute from 'components/RestrictedRoute';
+import PrivateRoute from 'components/PrivateRoute';
+import OldContacts from 'pages/OldContacts';
 
 // const ContactForm = lazy(() => import('components/ContactForm/ContactForm'));
 const RegisterPage = lazy(() => import('pages/RegisterPage'));
@@ -16,15 +19,35 @@ const ContactsPage = lazy(() => import('pages/ContactsPage'));
 const appRoutes = [
   {
     path: '/register',
-    element: <RegisterPage />,
+    element: (
+      <RestrictedRoute>
+        <RegisterPage />
+      </RestrictedRoute>
+    ),
   },
   {
     path: '/login',
-    element: <LoginPage />,
+    element: (
+      <RestrictedRoute>
+        <LoginPage />
+      </RestrictedRoute>
+    ),
   },
   {
     path: '/contacts',
-    element: <ContactsPage />,
+    element: (
+      <PrivateRoute>
+        <ContactsPage />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/oldContacts',
+    element: (
+      <PrivateRoute>
+        <OldContacts />
+      </PrivateRoute>
+    ),
   },
 ];
 
