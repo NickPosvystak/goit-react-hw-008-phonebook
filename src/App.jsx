@@ -41,18 +41,19 @@ const appRoutes = [
       </PrivateRoute>
     ),
   },
-  {
-    path: '/oldContacts',
-    element: (
-      <PrivateRoute>
-        <OldContacts />
-      </PrivateRoute>
-    ),
-  },
+  // {
+  //   path: '/oldContacts',
+  //   element: (
+  //     <PrivateRoute>
+  //       <OldContacts />
+  //     </PrivateRoute>
+  //   ),
+  // },
 ];
 
 export const App = () => {
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     dispatch(refreshThunk());

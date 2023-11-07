@@ -7,14 +7,14 @@ import {
 
 export const fetchContacts = createAsyncThunk(
   'contacts/getAll',
-  async (_, ThunkAPI) => {
+  async (_, thunkAPI) => {
     try {
       const contacts = await requestAllContacts();
       console.log('contacts: ', contacts);
 
       return contacts;
     } catch (error) {
-      return ThunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -108,4 +108,4 @@ const contactsSlice = createSlice({
 });
 
 export const { setFilterTerm } = contactsSlice.actions;
-export const contReduser = contactsSlice.reduser;
+export const contReduser = contactsSlice.reducer;

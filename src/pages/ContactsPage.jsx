@@ -4,8 +4,10 @@
 // import React from 'react';
 // import css from 'App.module.css';
 
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { addContact, deleteContact, fetchContacts } from "redux/ContactsReducer";
 import { selectContacts, selectContactsError, selectContactsFilterTerm, selectContactsIsLoading } from "redux/selectors";
 
 const ContactsPage = () => {
@@ -25,12 +27,27 @@ const ContactsPage = () => {
   const error = useSelector(selectContactsError)
   const filterTerm = useSelector(selectContactsFilterTerm)
   
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch])
+  
+   
   const onSubmit = (contact) => {
     console.log('contact: ', contact);
-    
+
+    dispatch(addContact(contact))
+    reset()
+  }
+  const onDeleteContact = contactId => {
+    dispatch(deleteContact(contactId))
   }
 
   return (
+    <div>
+
+
+   
     <form onSubmit={handleSubmit(onSubmit)}>
       <label>
         <span>Name:</span>
@@ -46,6 +63,18 @@ const ContactsPage = () => {
 
       <button type="submit">Add contact</button>
     </form>
+
+      {isLoading && <p>Loading...</p>}
+      <ul>
+        {Array.isArray(contacts) && contacts.map(({ id, name, number }) => {
+          return (<li key={id}>
+            <h3>{name}</h3>
+            <p>{number}</p>
+            <button onClick={()=>{onDeleteContact(id)}}>❌</button>
+          </li>)
+        })}
+      </ul>
+   </div>
   );
 };
 
