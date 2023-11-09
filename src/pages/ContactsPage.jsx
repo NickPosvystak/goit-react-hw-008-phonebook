@@ -4,77 +4,75 @@
 // import React from 'react';
 // import css from 'App.module.css';
 
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { addContact, deleteContact, fetchContacts } from "redux/ContactsReducer";
-import { selectContacts, selectContactsError, selectContactsFilterTerm, selectContactsIsLoading } from "redux/selectors";
+import { ContactForm } from 'components/ContactForm/ContactForm';
+import { Contacts } from 'components/Contacts.jsx/Contacts';
+import Filter from 'components/Filter/Filter';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addContact,
+  deleteContact,
+  fetchContacts,
+  setFilterTerm,
+} from 'redux/ContactsReducer';
+import {
+  selectContacts,
+  selectContactsError,
+  selectContactsFilterTerm,
+  selectContactsIsLoading,
+} from 'redux/selectors';
 
 const ContactsPage = () => {
+ 
 
-   const {
-     register,
-     handleSubmit,
-     reset,
-     formState: { errors },
-  } = useForm();
-  
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  
-  const contacts = useSelector(selectContacts)
-  const isLoading = useSelector(selectContactsIsLoading)
+  const contacts = useSelector(selectContacts);
+  const isLoading = useSelector(selectContactsIsLoading);
   const error = useSelector(selectContactsError)
-  const filterTerm = useSelector(selectContactsFilterTerm)
-  
+  const filter = useSelector(selectContactsFilterTerm)
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch])
-  
-   
-  const onSubmit = (contact) => {
-    console.log('contact: ', contact);
+  // useEffect(() => {
+  //   dispatch(fetchContacts());
+  // }, [dispatch]);
 
-    dispatch(addContact(contact))
-    reset()
+  const handleFilterChange = (value) => {
+    dispatch(setFilterTerm(value));
   }
-  const onDeleteContact = contactId => {
-    dispatch(deleteContact(contactId))
-  }
+
+  // const onSubmit = contact => {
+  //   console.log('contact: ', contact);
+
+  //   dispatch(addContact(contact));
+  //   reset();
+  // };
+
+
+  // const onDeleteContact = contactId => {
+  //   dispatch(deleteContact(contactId));
+  // };
+
+  const filterContacts = () => {
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
 
   return (
-    <div>
-
-
-   
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>
-        <span>Name:</span>
-        <input {...register('name', { required: true })} type="text" />
-        {errors.name && <span>This field is required</span>}
-      </label>
-      <label>
-        <span>Number:</span>
-        <input {...register('number', { required: true })} type="number" />
-        {errors.number && <span>This field is required</span>}
-      </label>
-     
-
-      <button type="submit">Add contact</button>
-    </form>
-
-      {isLoading && <p>Loading...</p>}
-      <ul>
-        {Array.isArray(contacts) && contacts.map(({ id, name, number }) => {
-          return (<li key={id}>
-            <h3>{name}</h3>
-            <p>{number}</p>
-            <button onClick={()=>{onDeleteContact(id)}}>❌</button>
-          </li>)
-        })}
-      </ul>
-   </div>
+    <>
+      <ContactForm />
+      <h2>Contacts</h2>
+      {isLoading && !error && <h3>Loading...</h3>}
+      {contacts && contacts.length !== 0 ? (
+        <>
+          <Filter onChange={handleFilterChange} filter={filter} />
+          <Contacts contacts={filterContacts} />
+        </>
+      ) : (
+        <p>There is no any contacts here yet</p>
+      )}
+    </>
   );
 };
 

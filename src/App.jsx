@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { refreshThunk } from 'redux/AuthReducer';
 import RestrictedRoute from 'components/RestrictedRoute';
 import PrivateRoute from 'components/PrivateRoute';
-import OldContacts from 'pages/OldContacts';
+import { Home } from 'pages/Home';
 
 // const ContactForm = lazy(() => import('components/ContactForm/ContactForm'));
 const RegisterPage = lazy(() => import('pages/RegisterPage'));
@@ -41,14 +41,15 @@ const appRoutes = [
       </PrivateRoute>
     ),
   },
-  // {
-  //   path: '/oldContacts',
-  //   element: (
-  //     <PrivateRoute>
-  //       <OldContacts />
-  //     </PrivateRoute>
-  //   ),
-  // },
+ 
+  {
+    path: '/',
+    element: (
+      <PrivateRoute>
+        <Home />
+      </PrivateRoute>
+    ),
+  },
 ];
 
 export const App = () => {

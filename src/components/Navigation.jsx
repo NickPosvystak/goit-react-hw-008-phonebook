@@ -16,7 +16,7 @@ const Navigation = () => {
     <nav>
       {authenticated ? (
         <>
-          {/* <StyledNavLink to="/oldContacts">OldContacts</StyledNavLink> */}
+          <StyledNavLink to="/">Home</StyledNavLink>
           <StyledNavLink to="/contacts">Contacts</StyledNavLink>
           <button type="button" onClick={onLogOut}>
             Log Out
