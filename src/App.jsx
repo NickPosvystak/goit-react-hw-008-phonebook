@@ -4,16 +4,17 @@
 import css from './App.module.css';
 import { Suspense, lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Navigation from 'components/Navigation';
+import Navigation from 'components/Navigation/Navigation';
 import { useDispatch } from 'react-redux';
 import { refreshThunk } from 'redux/AuthReducer';
 import RestrictedRoute from 'components/RestrictedRoute';
 import PrivateRoute from 'components/PrivateRoute';
-import { Home } from 'pages/Home';
+import { Home } from 'pages/Home/Home';
+import { StyledApp } from 'App.styled';
 
 // const ContactForm = lazy(() => import('components/ContactForm/ContactForm'));
 const RegisterPage = lazy(() => import('pages/RegisterPage'));
-const LoginPage = lazy(() => import('pages/LoginPage'));
+const LoginPage = lazy(() => import('pages/Login/LoginPage'));
 const ContactsPage = lazy(() => import('pages/ContactsPage'));
 
 const appRoutes = [
@@ -41,7 +42,7 @@ const appRoutes = [
       </PrivateRoute>
     ),
   },
- 
+
   {
     path: '/',
     element: (
@@ -54,7 +55,6 @@ const appRoutes = [
 
 export const App = () => {
   const dispatch = useDispatch();
-  
 
   useEffect(() => {
     dispatch(refreshThunk());
@@ -62,7 +62,7 @@ export const App = () => {
 
   return (
     <>
-      <div className={css.box}>
+      <StyledApp>
         <Navigation />
         <Suspense fallback="Loading...">
           <Routes>
@@ -71,7 +71,7 @@ export const App = () => {
             ))}
           </Routes>
         </Suspense>
-      </div>
+      </StyledApp>
     </>
   );
 };

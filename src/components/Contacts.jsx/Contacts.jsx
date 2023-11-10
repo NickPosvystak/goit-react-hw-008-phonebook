@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteContact, fetchContacts } from "redux/ContactsReducer";
 import { selectContacts, selectContactsError, selectContactsFilterTerm, selectContactsIsLoading } from "redux/selectors";
+import { StyledItem, StyledList } from "./StyledContacts";
 
 
 
 export const Contacts = ({ contacts }) => {
 
-    const contactsIetms = useSelector(selectContacts);
+    const contactsItems = useSelector(selectContacts);
     const isLoading = useSelector(selectContactsIsLoading);
     const error = useSelector(selectContactsError);
 
@@ -15,29 +16,29 @@ export const Contacts = ({ contacts }) => {
 
     const dispatch = useDispatch()
     
-      useEffect(() => {
-        dispatch(fetchContacts());
-      }, [dispatch]);
+      // useEffect(() => {
+      //   dispatch(fetchContacts());
+      // }, [dispatch]);
      
     
      const onDeleteContact = contactId => {
        dispatch(deleteContact(contactId));
      };
 
-     const filterContacts = () => {
-       return contacts.filter(({ name }) =>
-         name.toLowerCase().includes(filter.toLowerCase())
-       );
-     };
+    //  const filterContacts = () => {
+    //    return contacts.filter(({ name }) =>
+    //      name.toLowerCase().includes(filter.toLowerCase())
+    //    );
+    //  };
     
   return (
     <div>
       {/* {isLoading && <p>Loading...</p>} */}
-      <ul>
+      <StyledList>
         {/* {Array.isArray(contacts) && */}
-        {contactsIetms.map(({ id, name, number }) => {
+        {contactsItems.map(({ id, name, number }) => {
           return (
-            <li key={id}>
+            <StyledItem key={id}>
               <h3>{name}</h3>
               <p>{number}</p>
               <button
@@ -47,10 +48,10 @@ export const Contacts = ({ contacts }) => {
               >
                 ❌
               </button>
-            </li>
+            </StyledItem>
           );
         })}
-      </ul>
+      </StyledList>
     </div>
   );
 }

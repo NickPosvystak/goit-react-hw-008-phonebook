@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from 'redux/AuthReducer';
+import { StyledFormBtn, StyledFormInput, StyledFormLogin } from './Login.styled';
 
 const LoginPage = () => {
   const {
@@ -21,24 +22,27 @@ const LoginPage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <StyledFormLogin onSubmit={handleSubmit(onSubmit)}>
       <label>
         <span>Email:</span>
-        <input {...register('email', { required: true })} type="email" />
+        <StyledFormInput
+          {...register('email', { required: true })}
+          type="email"
+        />
         {errors.email && <span>This field is required</span>}
       </label>
-    
+
       <label>
         <span>Password:</span>
-        <input
+        <StyledFormInput
           {...register('password', { required: true, minLength: 7 })}
           type="password"
         />
         {errors.password && <span>This field is required</span>}
       </label>
 
-      <button type="submit">Sign In</button>
-    </form>
+      <StyledFormBtn type="submit">Sign In</StyledFormBtn>
+    </StyledFormLogin>
   );
 };
 

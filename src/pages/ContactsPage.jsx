@@ -33,9 +33,9 @@ const ContactsPage = () => {
   const error = useSelector(selectContactsError)
   const filter = useSelector(selectContactsFilterTerm)
 
-  // useEffect(() => {
-  //   dispatch(fetchContacts());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const handleFilterChange = (value) => {
     dispatch(setFilterTerm(value));
