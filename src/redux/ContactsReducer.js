@@ -49,17 +49,13 @@ const INITIAL_STATE = {
   contacts: null,
   isLoading: false,
   error: null,
-  filterTerm: '',
+  
 };
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: INITIAL_STATE,
-  reducers: {
-    setFilterTerm: (state, action) => {
-      state.filterTerm = action.payload;
-    },
-  },
+ 
   extraReducers: builder =>
     builder
       .addCase(fetchContacts.fulfilled, (state, action) => {
@@ -107,5 +103,4 @@ const contactsSlice = createSlice({
       ),
 });
 
-export const { setFilterTerm } = contactsSlice.actions;
 export const contReduser = contactsSlice.reducer;

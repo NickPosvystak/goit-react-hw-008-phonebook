@@ -13,3 +13,8 @@ export const selectContactsError = createSelector(selectPhonebook, phonebook => 
 
 export const selectContactsFilterTerm = createSelector(selectPhonebook, phonebook => phonebook.filterTerm)
 
+// filter
+
+const selectFilter = state => state.filter;
+
+export const selectFilterTerm = createSelector(selectFilter, filter => filter.filterTerm)

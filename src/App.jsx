@@ -13,9 +13,9 @@ import { Home } from 'pages/Home/Home';
 import { StyledApp } from 'App.styled';
 
 // const ContactForm = lazy(() => import('components/ContactForm/ContactForm'));
-const RegisterPage = lazy(() => import('pages/RegisterPage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('pages/Login/LoginPage'));
-const ContactsPage = lazy(() => import('pages/ContactsPage'));
+const ContactsPage = lazy(() => import('pages/ContactsPage/ContactsPage'));
 
 const appRoutes = [
   {

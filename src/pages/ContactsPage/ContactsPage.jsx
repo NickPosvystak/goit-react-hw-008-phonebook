@@ -8,38 +8,38 @@ import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Contacts } from 'components/Contacts.jsx/Contacts';
 import Filter from 'components/Filter/Filter';
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  addContact,
-  deleteContact,
+  // addContact,
+  // deleteContact,
   fetchContacts,
   setFilterTerm,
 } from 'redux/ContactsReducer';
 import {
   selectContacts,
   selectContactsError,
-  selectContactsFilterTerm,
+  // selectContactsFilterTerm,
   selectContactsIsLoading,
+  selectFilterTerm,
 } from 'redux/selectors';
+import { StyledTitle } from './ContactsPage.styled';
 
 const ContactsPage = () => {
- 
-
   const dispatch = useDispatch();
 
   const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectContactsIsLoading);
-  const error = useSelector(selectContactsError)
-  const filter = useSelector(selectContactsFilterTerm)
+  const error = useSelector(selectContactsError);
+  const filter = useSelector(selectFilterTerm);
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const handleFilterChange = (value) => {
-    dispatch(setFilterTerm(value));
-  }
+  // const handleFilterChange = value => {
+  //   dispatch(setFilterTerm(value));
+  // };
 
   // const onSubmit = contact => {
   //   console.log('contact: ', contact);
@@ -47,7 +47,6 @@ const ContactsPage = () => {
   //   dispatch(addContact(contact));
   //   reset();
   // };
-
 
   // const onDeleteContact = contactId => {
   //   dispatch(deleteContact(contactId));
@@ -62,11 +61,12 @@ const ContactsPage = () => {
   return (
     <>
       <ContactForm />
-      <h2>Contacts</h2>
+      <StyledTitle>Contacts</StyledTitle>
+
       {isLoading && !error && <h3>Loading...</h3>}
       {contacts && contacts.length !== 0 ? (
         <>
-          <Filter onChange={handleFilterChange} filter={filter} />
+          <Filter  />
           <Contacts contacts={filterContacts} />
         </>
       ) : (

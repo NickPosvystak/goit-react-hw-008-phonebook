@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledFilter } from './StyledFilter';
-import { selectContactsFilterTerm } from 'redux/selectors';
-import { setFilterTerm } from 'redux/ContactsReducer';
+import { selectFilterTerm } from 'redux/selectors';
+import { setFilterTerm } from 'redux/filterSlice';
+// import { setFilterTerm } from 'redux/ContactsReducer';
 
-export const Filter = ({ onChange }) => {
+export const Filter = () => {
     const dispatch = useDispatch()
 
-    const filter = useSelector(selectContactsFilterTerm)
+    const filter = useSelector(selectFilterTerm)
 
     const handleFilter = (event) => {
     dispatch(setFilterTerm(event.currentTarget.value));
@@ -17,7 +18,7 @@ export const Filter = ({ onChange }) => {
       <h3>Find contact by name</h3>
       <input
         type="text"
-        name="filter"
+       
         placeholder="Search contact"
         value={filter}
         onChange={handleFilter}
