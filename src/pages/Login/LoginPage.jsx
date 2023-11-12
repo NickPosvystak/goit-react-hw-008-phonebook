@@ -16,7 +16,6 @@ const LoginPage = () => {
 
   const onSubmit = data => {
     dispatch(loginThunk(data));
-    console.log('data: ', data);
 
     reset();
   };

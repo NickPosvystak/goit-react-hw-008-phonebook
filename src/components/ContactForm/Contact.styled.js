@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledForm = styled.form`
-  /* display: flex; */
   flex-direction: column;
   flex-wrap: wrap;
   padding: 10px;
@@ -11,11 +10,8 @@ export const StyledForm = styled.form`
 
   margin-right: auto;
   margin-left: auto;
-  /* width: 280px; */
 
-  /* @media only screen and (min-width: 768px) {
-    width: 600px;
-  } */
+ 
 `;
 
 export const Title = styled.h1`
@@ -51,6 +47,8 @@ export const StyledBtn = styled.button`
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
   @media only screen and (min-width: 768px) {
     margin-top: 10px;

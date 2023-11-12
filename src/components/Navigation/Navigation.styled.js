@@ -10,8 +10,6 @@ export const StyledNavLink = styled(NavLink)`
   font-size: 16px;
   text-decoration: none;
 
-  /* margin-top: 10px;
-  margin-left: 12px; */
   margin-right: 8px;
 
   transition: all 0.3s;
@@ -27,7 +25,7 @@ export const StyledNavLink = styled(NavLink)`
   }
 `;
 export const StyledBtn = styled.button`
-cursor: pointer;
+  cursor: pointer;
 
-margin-left: 5px;
-`
+  margin-left: 5px;
+`;

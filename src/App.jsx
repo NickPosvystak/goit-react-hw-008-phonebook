@@ -1,7 +1,3 @@
-// import { ContactForm } from 'components/ContactForm/ContactForm';
-// import ContactList from 'components/ContactList/ContactList';
-// import Filter from 'components/Filter/Filter';
-import css from './App.module.css';
 import { Suspense, lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from 'components/Navigation/Navigation';
@@ -12,7 +8,6 @@ import PrivateRoute from 'components/PrivateRoute';
 import { Home } from 'pages/Home/Home';
 import { StyledApp } from 'App.styled';
 
-// const ContactForm = lazy(() => import('components/ContactForm/ContactForm'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('pages/Login/LoginPage'));
 const ContactsPage = lazy(() => import('pages/ContactsPage/ContactsPage'));

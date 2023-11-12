@@ -27,7 +27,6 @@ export const registerThunk = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       const authData = await requestRegister(formData);
-      console.log('authData: ', authData);
 
       return authData; // Go to payload
     } catch (error) {
@@ -43,7 +42,6 @@ export const refreshThunk = createAsyncThunk(
     try {
       setToken(token);
       const authData = await requestRefreshUser();
-      console.log('authData: ', authData);
 
       return authData; // Go to payload
     } catch (error) {
@@ -97,28 +95,24 @@ const authSlice = createSlice({
 
       // Register additional-----
 
-    
       .addCase(registerThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.authenticated = true;
         state.token = action.payload.token;
         state.user = action.payload.user;
       })
-     
 
       //Login additional-----
 
-    
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.authenticated = true;
         state.token = action.payload.token;
         state.user = action.payload.user;
       })
-    
 
       //LogOut additional-----
-      
+
       .addCase(logOutThunk.fulfilled, state => {
         return INITIAL_STATE;
       })

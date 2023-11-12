@@ -2,7 +2,6 @@ import { StyledContainer } from 'App.styled';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutThunk } from 'redux/AuthReducer';
-// import { Outlet } from 'react-router-dom';
 import { selectAuthAuthenticated } from 'redux/authSelector';
 import { User } from '../User/User';
 import { StyledBtn, StyledNavLink } from './Navigation.styled';
@@ -31,7 +30,6 @@ const Navigation = () => {
           <StyledNavLink to="/register">Register</StyledNavLink>
         </>
       )}
-      {/* <Outlet /> */}
     </StyledContainer>
   );
 };

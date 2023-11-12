@@ -10,7 +10,6 @@ export const fetchContacts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const contacts = await requestAllContacts();
-      console.log('contacts: ', contacts);
 
       return contacts;
     } catch (error) {
@@ -24,7 +23,6 @@ export const addContact = createAsyncThunk(
   async (newContact, thunkAPI) => {
     try {
       const contact = await requestAddContact(newContact);
-      console.log('contact: ', contact);
 
       return contact;
     } catch (error) {
@@ -38,11 +36,10 @@ export const deleteContact = createAsyncThunk(
   async (contactId, thunkAPI) => {
     try {
       const contact = await requestDeleteContact(contactId);
-      console.log('contact: ', contact);
 
       return contact;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -51,13 +48,12 @@ const INITIAL_STATE = {
   contacts: null,
   isLoading: false,
   error: null,
-  
 };
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: INITIAL_STATE,
- 
+
   extraReducers: builder =>
     builder
       .addCase(fetchContacts.fulfilled, (state, action) => {
@@ -71,8 +67,6 @@ const contactsSlice = createSlice({
         } else {
           state.contacts = [action.payload];
         }
-        // state.products = [action.payload, ...state.products];
-        // state.products.push(action.payload);
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.isLoading = false;

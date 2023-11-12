@@ -1,14 +1,15 @@
 import { useSelector } from "react-redux"
 import { selectUser } from "redux/authSelector"
+import { StyledUser } from "./User.styled"
 
 export const User = () => {
 
     const userItem = useSelector(selectUser)
     
   return (
-    <div>
-          <p>Hello, {userItem}</p>  
-    </div>
+    <StyledUser>
+          <p>{userItem}</p>  
+    </StyledUser>
   )
 }
 
