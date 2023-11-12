@@ -10,7 +10,7 @@ export const Filter = () => {
     const filter = useSelector(selectFilterTerm)
 
     const handleFilter = (event) => {
-    dispatch(setFilterTerm(event.currentTarget.value));
+    dispatch(setFilterTerm(event.target.value));
 }
 
   return (

@@ -14,7 +14,6 @@ import {
   // addContact,
   // deleteContact,
   fetchContacts,
-  setFilterTerm,
 } from 'redux/ContactsReducer';
 import {
   selectContacts,
@@ -52,11 +51,11 @@ const ContactsPage = () => {
   //   dispatch(deleteContact(contactId));
   // };
 
-  const filterContacts = () => {
-    return contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.toLowerCase())
-    );
-  };
+  // const filterContacts = () => {
+  //   return contacts.filter(({ name }) =>
+  //     name.toLowerCase().includes(filter.toLowerCase())
+  //   );
+  // };
 
   return (
     <>
@@ -67,7 +66,7 @@ const ContactsPage = () => {
       {contacts && contacts.length !== 0 ? (
         <>
           <Filter  />
-          <Contacts contacts={filterContacts} />
+          <Contacts  />
         </>
       ) : (
         <p>There is no any contacts here yet</p>
